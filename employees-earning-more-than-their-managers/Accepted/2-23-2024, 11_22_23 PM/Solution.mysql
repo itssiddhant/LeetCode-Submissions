@@ -1,0 +1,25 @@
+// https://leetcode.com/problems/employees-earning-more-than-their-managers
+
+# Write your MySQL query statement below
+-- SELECT name as Employee from Employee where salary<
+--  (select salary from Employee where managerId is Null and id <>managerId)
+
+--  select name as Employee from Employee where managerId is not null and salary > 
+--  (select salary from Employee where id = (Select id from Employee where id <> managerId))
+
+
+-- select name as Employee from Employee where 
+-- managerId =(select id from Employee where managerId is null having salary)
+
+-- select name as Employee from Employee e1 inner join Employee e2 where salary>
+-- select salary from 
+
+-- salary >
+-- (select salary from Employee where id = (select id from Employee where managerId is null ))
+
+-- select name as Employee from Employee where salary >
+-- (select max(salary) from Employee where id = 
+-- (select id from Employee where managerId is not NULL) and (select id from Employee where managerId is Null))
+
+select e.name as Employee from Employee e
+join Employee m on e.managerId=m.id where e.salary>m.salary
